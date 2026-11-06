@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     const char *espdev = argc > 3 ? argv[3] : "/dev/vda1";
     int rc;
 
-    /* Void base: init ruint + red + arranque. "linux6.18" evita el
+    /* Void base: init ruint + red + arranque. "linux6.12" evita el
      * meta 'linux' que arrastra todo el firmware (~600MB). */
     static const pkg_t pkgs[] = {
         {.name = "glibc"},
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
         {.name = "coreutils"},
         {.name = "util-linux"},
         {.name = "bash"},
-        {.name = "linux6.18"},
+        {.name = "linux6.12"},
         {.name = "runit"},
         {.name = "runit-void"},
         {.name = "dhcpcd"},
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
         {.name = "dosfstools"},
     };
     static const user_t users[] = {
-        {.name = "user", .groups = "wheel", .shell = "/bin/sh"},
+        {.name = "user", .shell = "/bin/sh"},
     };
     dysk_t ds[2];
     bootloader_cfg_t bl;
