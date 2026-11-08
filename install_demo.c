@@ -50,6 +50,9 @@ int main(int argc, char **argv)
         {.name = "dhcpcd"},
         {.name = "e2fsprogs"},
         {.name = "dosfstools"},
+        /* limine pkg del TARGET: BOOTX64.EFI/limine-bios.sys + CLI:
+         * provision del bootloader 100% independiente del host. */
+        {.name = "limine"},
     };
     static const user_t users[] = {
         {.name = "user", .shell = "/bin/sh"},
