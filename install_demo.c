@@ -40,6 +40,7 @@ int main(int argc, char **argv)
      * meta 'linux' que arrastra todo el firmware (~600MB). */
     static const pkg_t pkgs[] = {
         {.name = "glibc"},
+        {.name = "base-system"},
         {.name = "base-files"},
         {.name = "coreutils"},
         {.name = "util-linux"},
@@ -53,6 +54,11 @@ int main(int argc, char **argv)
         /* limine pkg del TARGET: BOOTX64.EFI/limine-bios.sys + CLI:
          * provision del bootloader 100% independiente del host. */
         {.name = "limine"},
+        /* Void no trae dracut con el kernel: sin el, el hook de kernel
+         * no genera initramfs y el root=UUID ext4 paniquea (el numero
+         * ext4/virtio son MODULOS). El bridge lo corre chroot z-binds
+         * y configure_limine_refresh lo deja en el ESP. */
+        {.name = "dracut"},
     };
     static const user_t users[] = {
         {.name = "user", .shell = "/bin/sh"},
