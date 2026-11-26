@@ -56,8 +56,8 @@ int main(int argc, char **argv)
         {.name = "limine"},
         /* Void no trae dracut con el kernel: sin el, el hook de kernel
          * no genera initramfs y el root=UUID ext4 paniquea (el numero
-         * ext4/virtio son MODULOS). El bridge lo corre chroot z-binds
-         * y configure_limine_refresh lo deja en el ESP. */
+         * ext4/virtio son MODULOS). El bridge detecta el kernel instalado,
+         * genera el initramfs y configure_limine_refresh lo deja en el ESP. */
         {.name = "dracut"},
     };
     static const user_t users[] = {
@@ -80,8 +80,6 @@ int main(int argc, char **argv)
     bl.bootloader = BOOT_LIMINE;
     bl.firmware = UEFI;
     bl.install_path = "/boot/efi";
-    bl.kernel = "/boot/vmlinuz";
-    bl.ramdisk = "/boot/initramfs.img";
     bl.timeout = 3;
 
     sys = create_system();
