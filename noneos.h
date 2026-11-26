@@ -355,8 +355,8 @@ sys_system_t *sys_system_envs(sys_system_t *s, const sys_env_t *envs,
  * Equivale al .swapfile("/dev/...") de una sola llamada. */
 int sys_system_take_swapdev(sys_system_t *s, const char *device);
 
-/* Adoptan (liberan el hijo siempre, tambien en duplicado keep-first).
- * 0 ok, -1 error (hijo NO consumido: sigue del llamante). */
+/* Adoptan en exito (tambien duplicado keep-first). 0 ok; ante -1 el hijo
+ * sigue perteneciendo al llamante y no se consume. */
 int sys_system_take_package(sys_system_t *s, sys_package_t *p);
 int sys_system_take_dysk(sys_system_t *s, sys_dysk_t *d);
 int sys_system_take_user(sys_system_t *s, sys_user_t *u);
@@ -669,8 +669,8 @@ system_t system_bootloader(system_t s, bootloader_cfg_t b);
 system_t system_libc(system_t s, int libc);
 system_t system_libc_custom(system_t s, const char *name);
 system_t system_users(system_t s, const user_t *us, size_t n);
-/* Transfiere propiedad de opts/raws (deja los originales vacios). */
-system_t system_services(system_t s, const service_t *svcs, size_t n);
+/* Transfiere opts/raws; requiere array mutable y deja vacias las entradas. */
+system_t system_services(system_t s, service_t *svcs, size_t n);
 system_t system_packages(system_t s, const package_t *ps, size_t n);
 system_t system_dysks(system_t s, const dysk_t *ds, size_t n);
 system_t system_crypt(system_t s, const char *uuid, const char *keyfile,
